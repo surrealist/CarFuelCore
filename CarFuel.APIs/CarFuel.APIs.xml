@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CarFuel.APIs</name>
+    </assembly>
+    <members>
+        <member name="M:CarFuel.APIs.Controllers.CarsController.GetAll">
+            <summary>
+            Get all of your cars.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:CarFuel.APIs.Controllers.CarsController.GetById(System.Guid)">
+            <summary>
+            Get a car
+            </summary>
+            <param name="id">Car Id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

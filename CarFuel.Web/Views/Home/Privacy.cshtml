@@ -1,0 +1,36 @@
+﻿<h2>Cars</h2>
+
+<div id="cars"></div>
+
+
+@section Scripts {
+  <script>
+
+    $.ajaxSetup({
+      dataType: "json",
+      contentType: 'application/json; charset=utf-8',
+      headers: {
+        "Authorization": "Bearer " + sessionStorage.getItem("token")
+      }
+    });
+    
+    loadCars();
+
+    function loadCars() {
+      const baseUrl = 'https://localhost:44379';
+      const path = baseUrl + '/api/v1/cars';
+
+      $.get(path).then(res => { 
+        if (res.length == 0) {
+          $("#cars").html('No cars.');
+        } else {
+          $("#cars").empty();
+          res.forEach(x => {
+            var c = `<div>${x.id}: ${x.make}</div>`;
+            $("#cars").append(c);
+          });
+        }
+      });
+    }
+  </script>
+}

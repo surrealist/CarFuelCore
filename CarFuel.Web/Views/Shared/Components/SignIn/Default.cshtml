@@ -1,0 +1,45 @@
+﻿
+<div id="signin-box" class="card border-secondary shadow-sm">
+  <div class="card-header">
+    <h5>Sign In</h5>
+  </div>
+  <div class="card-body p-3">
+    <input id="u" class="form-control mb-2" />
+    <input id="p" class="form-control mb-2" />
+    <button id="btn" class="btn btn-outline-primary">Sign In</button>
+  </div>
+</div>
+<div id="signin-result" class="d-none">
+</div>
+
+<script>
+  $.ajaxSetup({
+    dataType: "json",
+    contentType: 'application/json; charset=utf-8'
+  });
+
+  $("#btn").click(function () {
+    const baseUrl = 'https://localhost:44379';
+    const path = baseUrl + '/api/v1/auth';
+
+    const data = {
+      username: $("#u").val(), 
+      password: $("#p").val()
+    };
+
+    $.post(path, JSON.stringify(data)).then(x => {
+
+      sessionStorage.setItem('token', x.token);
+
+      let token = sessionStorage.getItem('token');
+
+      $("#signin-box").hide();
+      $("#signin-result").text('Signed In. ' + token)
+         .removeClass("d-none");
+      console.log(x);
+    }).catch(x => {
+      alert(x.responseText);
+      console.log("Err", x);
+    });
+  });
+</script>
